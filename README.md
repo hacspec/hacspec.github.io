@@ -1,96 +1,136 @@
 # hacspec [![hacspec chat][chat-image]][chat-link]
 
-A specification language for crypto primitives in Rust.
+<img src="https://raw.githubusercontent.com/hacspec/hacspec/master/img/mascot.png" width=100 style="float: left;"> A specification language for crypto primitives in Rust.
 
-*This is the successor of https://github.com/HACS-workshop/hacspec.*
+_This is the successor of https://github.com/HACS-workshop/hacspec._
 
 ## Crates
 
 | Name             | Crates.io                                                                 |                                                                 Docs                                                                  |                        CI                         |
 | :--------------- | :------------------------------------------------------------------------ | :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-| hacspec          | [![crates.io][crate-hacspec]](https://crates.io/crates/hacspec)           |           | [![Build & Test Status][build-image]][build-link] |
+| hacspec          | [![crates.io][crate-hacspec]](https://crates.io/crates/hacspec)           |                                                                                                                                       | [![Build & Test Status][build-image]][build-link] |
 | hacspec-lib      | [![crates.io][crate-lib]](https://crates.io/crates/hacspec-lib)           |   [![Docs](https://img.shields.io/badge/docs-master-blue.svg?logo=rust)](https://hacspec.github.io/hacspec/hacspec_lib/index.html)    | [![Build & Test Status][build-image]][build-link] |
 | hacspec-provider | [![crates.io][crate-provider]](https://crates.io/crates/hacspec-provider) | [![Docs](https://img.shields.io/badge/docs-master-blue.svg?logo=rust)](https://hacspec.github.io/hacspec/hacspec_provider/index.html) | [![Build & Test Status][build-image]][build-link] |
 
 ## Usage
 
 ### Writing hacspec
-hacspec is always valid Rust code such that starting to write hacspec is as simple as writing Rust code that is compliant with the [language](https://github.com/hacspec/hacspec/blob/master/Language.md) specification.
+
+hacspec is always valid Rust code such that starting to write hacspec is as simple as writing Rust code that is compliant with the [language](Language.md) specification.
 However, this is very tedious.
 It is recommended to use the [hacspec standard library](https://crates.io/crates/hacspec-lib) to write hacspec.
 In order to ensure that the code is a hacspec one can use the typecheker.
 
 ### Typechecking
+
+Make sure you have at least `rustup 1.23.0`.
+The [`rust-toolchain`](./language/rust-toolchain) automatically picks the correct Rust nightly version and components.
+The compiler version is currently pinned to `nightly-2021-03-11`.
+
+**Installing the typechecker from the repository**
+
+```
+cargo install --path language
+```
+
+**Installing the typechecker from crates.io (not always up to date)**
+
+```
+cargo install hacspec --version 0.2.0-beta.4
+```
+
+**Manually installing dependencies**
+
 First ensure that Rust nightly is installed and the typechecker is installed.
 
 ```bash
-rustup toolchain install nightly
-rustup component add --toolchain nightly rustc-dev
-cargo +nightly install hacspec
+cd language
+rustup toolchain install nightly-2021-03-11
+rustup component add --toolchain nightly-2021-03-11 rustc-dev
+cargo +nightly-2021-03-11 install hacspec
 ```
+
+Depending on your system you might also need `llvm-tools-preview`
+
+```bash
+rustup component add --toolchain nightly-2021-03-11 llvm-tools-preview
+```
+
+**Usage**
 
 In a hacspec crate or workspace directory typechecking can be done as follows now:
+(Specifying `+nightly-2021-03-11` is only necessary if it's not specified in the toolchain as it is in this main repository.)
 
 ```bash
-cargo +nightly hacspec <crate-name>
+cargo +nightly-2021-03-11 hacspec <crate-name>
 ```
 
-Note that the crate needs to be compiled before it can be typechecked.
+Note that the crate dependencies need to be compiled before it can be typechecked.
 
 ```bash
-cargo +nightly build
+cargo +nightly-2021-03-11 build
 ```
 
 If typechecking succeeds, it should show
 
 ```bash
-> Successfully verified.
+> Successfully typechecked.
 ```
 
 ### Generating code
-To generate F* or EasyCrypt code from hacspec the typechecker (see above) is required.
+
+To generate F\* or EasyCrypt code from hacspec the typechecker (see above) is required.
 
 ```bash
-cargo +nightly hacspec -o <fst-name>.fst <crate-name>
-cargo +nightly hacspec -o <ec-name>.ec <crate-name>
+cargo +nightly-2021-03-11 hacspec -o <fst-name>.fst <crate-name>
+cargo +nightly-2021-03-11 hacspec -o <ec-name>.ec <crate-name>
 ```
+
+## Publications & Other material
+
+- [📕 Tech report](https://hal.inria.fr/hal-03176482)
+- [📕 Original hacspec paper](https://www.franziskuskiefer.de/publications/hacspec18/)
 
 # Repository Structure
 
 This is a cargo workspace consisting of three main crates:
-* [hacspec](https://github.com/hacspec/hacspec/blob/master/language): the compiler, typechecker and language infrastructure for the hacspec subset of Rust
-  * Note that the language infrastructure is excluded from the main workspace of crates, so it won't be build when you launch `cargo build` from the root of the repository.
-* [hacspec-lib](https://github.com/hacspec/hacspec/blob/master/lib): the standard library of hacspec programs
-* [hacspec-provider](https://github.com/hacspec/hacspec/blob/master/provider): a cryptography provider with a set of cryptographic primitives written in hacspec
-  * This combines the individual crates from the [examples](https://github.com/hacspec/hacspec/blob/master/examples) directory and implements the [RustCrypto](https://github.com/RustCrypto/traits) API on top to use them from regular Rust code.
+
+- [hacspec](https://github.com/hacspec/hacspec/blob/master/language/): the compiler, typechecker and language infrastructure for the hacspec subset of Rust
+  - Note that the language infrastructure is excluded from the main workspace of crates, so it won't be build when you launch `cargo build` from the root of the repository.
+- [hacspec-lib](https://github.com/hacspec/hacspec/blob/master/lib/): the standard library of hacspec programs
+- [hacspec-provider](https://github.com/hacspec/hacspec/blob/master/provider/): a cryptography provider with a set of cryptographic primitives written in hacspec
+  - This combines the individual crates from the [examples](https://github.com/hacspec/hacspec/blob/master/examples/) directory and implements the [RustCrypto](https://github.com/RustCrypto/traits) API on top to use them from regular Rust code.
 
 The three main crates make use of a set of additional crates:
-* [abstract-integers](https://github.com/hacspec/hacspec/blob/master/utils/abstract-integers/): wrapper around `BigInt` for modular natural integers
-* [secret-integers](https://github.com/hacspec/hacspec/blob/master/utils/secret-integers/): wrapper around integer types for constant-timedness
-* [unsafe-hacspec-examples](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/): cryptographic specs written in hacspec but not formally typechecked yet(hence the unsafety) as hacspec is a work in progress
-* [examples](https://github.com/hacspec/hacspec/blob/master/examples/): cryptographic primitives that have passed the hacspec typechecking
-* [hacspec-attributes](https://github.com/hacspec/hacspec/blob/master/utils/attributes): helper for the hacspec library
-* [hacspec-dev](https://github.com/hacspec/hacspec/blob/master/utils/dev/): utilities that are not part of the language
+
+- [abstract-integers](https://github.com/hacspec/hacspec/blob/master/utils/abstract-integers/): wrapper around `BigInt` for modular natural integers
+- [secret-integers](https://github.com/hacspec/hacspec/blob/master/utils/secret-integers/): wrapper around integer types for constant-timedness
+- [unsafe-hacspec-examples](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/): cryptographic specs written in hacspec but not formally typechecked yet(hence the unsafety) as hacspec is a work in progress
+- [examples](https://github.com/hacspec/hacspec/blob/master/examples/): cryptographic primitives that have passed the hacspec typechecking
+- [hacspec-attributes](https://github.com/hacspec/hacspec/blob/master/utils/attributes): helper for the hacspec library
+- [hacspec-dev](https://github.com/hacspec/hacspec/blob/master/utils/dev/): utilities that are not part of the language
 
 Compiled code:
-* [fstar](https://github.com/hacspec/hacspec/blob/master/fstar/): contains F* translations of the cryptographic specs, produced by the hacspec compiler
-* [easycrypt](https://github.com/hacspec/hacspec/blob/master/easycrypt/): contains EasyCrypt translations of the cryptographic specs, produced by the hacspec compiler
+
+- [fstar](https://github.com/hacspec/hacspec/blob/master/fstar/): contains F\* translations of the cryptographic specs, produced by the hacspec compiler
+- [easycrypt](https://github.com/hacspec/hacspec/blob/master/easycrypt/): contains EasyCrypt translations of the cryptographic specs, produced by the hacspec compiler
 
 ## Contributing
 
 Before starting any work please join the [Zulip chat][chat-link], start a [discussion on Github](https://github.com/hacspec/hacspec/discussions), or file an [issue](https://github.com/hacspec/hacspec/issues) to discuss your contribution.
 
-The main entry points for contributions and some general work items are 
-* the [language](https://github.com/hacspec/hacspec/blob/master/language/) if you want to work on the hacspec language itself
-  * improve the typechecker
-  * improve the existing compiler backends (F* and EasyCrypt)
-  * add a new compiler backend
-* hacspec [implementations](https://github.com/hacspec/hacspec/blob/master/examples/)
-  * implementing new cryptographic primitives in hacspec
-  * improve the [provider](https://github.com/hacspec/hacspec/blob/master/provider/)
-* the [standard library](https://github.com/hacspec/hacspec/blob/master/lib/)
-  * enhance numeric implementations
-  * enhance vector arithmetic
+The main entry points for contributions and some general work items are
+
+- the [language](https://github.com/hacspec/hacspec/blob/master/language/) if you want to work on the hacspec language itself
+  - improve the typechecker
+  - improve the existing compiler backends (F\* and EasyCrypt)
+  - add a new compiler backend
+- hacspec [implementations](https://github.com/hacspec/hacspec/blob/master/examples/)
+  - implementing new cryptographic primitives in hacspec
+  - improve the [provider](https://github.com/hacspec/hacspec/blob/master/provider/)
+- the [standard library](https://github.com/hacspec/hacspec/blob/master/lib/)
+  - enhance numeric implementations
+  - enhance vector arithmetic
 
 # Examples
 
@@ -98,26 +138,29 @@ There's a set of example specs, divided between the [safe](https://github.com/ha
 
 ## Examples
 
-* [Chacha20](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-chacha20/src/chacha20.rs)
-* [Poly1305](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-poly1305/src/poly1305.rs)
-* [Chacha20Poly1305](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-chacha20poly1305/src/chacha20poly1305.rs)
-* [SHA256](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-sha256/src/sha256.rs)
-* [Curve25519](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-curve25519/src/curve25519.rs)
-* [NTRU-prime](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-hacspec-ntru-prime/src/ntru-prime.rs)
-* [SHA-3](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-sha3/src/sha3.rs)
+- [Chacha20](https://github.com/hacspec/hacspec/blob/master/examples/chacha20/src/chacha20.rs)
+- [Poly1305](https://github.com/hacspec/hacspec/blob/master/examples/poly1305/src/poly1305.rs)
+- [Chacha20Poly1305](https://github.com/hacspec/hacspec/blob/master/examples/chacha20poly1305/src/chacha20poly1305.rs)
+- [SHA256](https://github.com/hacspec/hacspec/blob/master/examples/sha256/src/sha256.rs)
+- [Curve25519](https://github.com/hacspec/hacspec/blob/master/examples/curve25519/src/curve25519.rs)
+- [NTRU-prime](https://github.com/hacspec/hacspec/blob/master/examples/hacspec-ntru-prime/src/ntru-prime.rs)
+- [SHA-3](https://github.com/hacspec/hacspec/blob/master/examples/sha3/src/sha3.rs)
+- [HKDF-SHA256](https://github.com/hacspec/hacspec/blob/master/examples/hkdf/src/hkdf.rs)
+- [HMAC-SHA256](https://github.com/hacspec/hacspec/blob/master/examples/hmac/src/hmac.rs)
+- [BLS12-381](https://github.com/hacspec/hacspec/blob/master/examples/bls12-381/src/bls12-381.rs)
+- [RIOT bootloade](https://github.com/hacspec/hacspec/blob/master/examples/riot-bootloader/src/lib.rs)
+- [GIMLI](https://github.com/hacspec/hacspec/blob/master/examples/gimli/src/gimli.rs)
+- [P256](https://github.com/hacspec/hacspec/blob/master/examples/p256/src/p256.rs)
+- [ECDSA-P256-SHA256](https://github.com/hacspec/hacspec/blob/master/examples/ecdsa-p256-sha256/src/ecdsa.rs)
 
 ## Unsafe examples
 
-* [AES 128/256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/aes.rs)
-* [GF 128](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/gf128.rs)
-* [AES-GCM 128/256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/aesgcm.rs)
-* [Blake2b](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/blake2/blake2b.rs)
-* [HKDF-SHA256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/hkdf/hkdf.rs)
-* [HMAC-SHA256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/hmac/hmac.rs)
-* [P256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/p256/p256.rs)
+- [AES 128/256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/aes.rs)
+- [GF 128](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/gf128.rs)
+- [AES-GCM 128/256](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/aes_gcm/aesgcm.rs)
+- [Blake2b](https://github.com/hacspec/hacspec/blob/master/examples-unsafe/src/blake2/blake2b.rs)
 
-[//]: # (badges)
-
+[//]: # "badges"
 [crate-outdated-image]: https://img.shields.io/badge/crate-outdated-red.svg?logo=rust
 [crate-hacspec]: https://img.shields.io/crates/v/hacspec.svg?logo=rust
 [crate-lib]: https://img.shields.io/crates/v/hacspec-lib.svg?logo=rust
