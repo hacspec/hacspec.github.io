@@ -1,4 +1,4 @@
-# hacspec [![hacspec chat][chat-image]][chat-link]
+# hacspec
 
 <img src="https://raw.githubusercontent.com/hacspec/hacspec/master/img/mascot.png" width=100 style="float: left;"> A specification language for crypto primitives in Rust.
 
