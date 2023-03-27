@@ -4,16 +4,16 @@
 
 _This is the successor of https://github.com/HACS-workshop/hacspec._
 
-For a quick intro, you can look at the [presentation slides](./presentation_slides.pdf). An in-depth
-[technical report](https://hal.inria.fr/hal-03176482) is also available.
+For a quick intro, you can look at the [presentation slides](./presentation_slides.pdf). 
+More information is available in the [book](https://hacspec.github.io/book/index.html).
+Also, see the Publications below.
 
 ## Crates
 
 | Name             | Crates.io                                                                 |                                                                 Docs                                                                  |                        CI                         |
 | :--------------- | :------------------------------------------------------------------------ | :-----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-| hacspec          | [![crates.io][crate-hacspec]](https://crates.io/crates/hacspec)           |                           [![Docs](https://img.shields.io/badge/docs-master-blue.svg?logo=rust)](language/)                           | [![Build & Test Status][build-image]][build-link] |
+| hacspec          | [![crates.io][crate-hacspec]](https://crates.io/crates/hacspec)           |                                           | [![Build & Test Status][build-image]][build-link] |
 | hacspec-lib      | [![crates.io][crate-lib]](https://crates.io/crates/hacspec-lib)           |   [![Docs](https://img.shields.io/badge/docs-master-blue.svg?logo=rust)](https://hacspec.github.io/hacspec/hacspec_lib/index.html)    | [![Build & Test Status][build-image]][build-link] |
-| hacspec-provider | [![crates.io][crate-provider]](https://crates.io/crates/hacspec-provider) | [![Docs](https://img.shields.io/badge/docs-master-blue.svg?logo=rust)](https://hacspec.github.io/hacspec/hacspec_provider/index.html) | [![Build & Test Status][build-image]][build-link] |
 
 ## Usage
 
@@ -28,7 +28,7 @@ In order to ensure that the code is a hacspec one can use the typecheker.
 
 Make sure you have at least `rustup 1.23.0`.
 The [`rust-toolchain`](./language/rust-toolchain) automatically picks the correct Rust nightly version and components.
-The compiler version is currently pinned to `nightly-2021-11-14`.
+The compiler version is currently pinned to `nightly-2023-01-15`.
 
 **Installing the typechecker from the repository**
 ```
@@ -46,30 +46,30 @@ First ensure that Rust nightly is installed and the typechecker is installed.
 
 ```bash
 cd language
-rustup toolchain install nightly-2021-11-14
-rustup component add --toolchain nightly-2021-11-14 rustc-dev
-cargo +nightly-2021-11-14 install hacspec
+rustup toolchain install nightly-2023-01-15
+rustup component add --toolchain nightly-2023-01-15 rustc-dev
+cargo +nightly-2023-01-15 install hacspec
 ```
 
 Depending on your system you might also need `llvm-tools-preview`
 
 ```bash
-rustup component add --toolchain nightly-2021-11-14 llvm-tools-preview
+rustup component add --toolchain nightly-2023-01-15 llvm-tools-preview
 ```
 
 **Usage**
 
 In a hacspec crate or workspace directory typechecking can be done as follows now:
-(Specifying `+nightly-2021-11-14` is only necessary if it's not specified in the toolchain as it is in this main repository.)
+(Specifying `+nightly-2023-01-15` is only necessary if it's not specified in the toolchain as it is in this main repository.)
 
 ```bash
-cargo +nightly-2021-11-14 hacspec <crate-name>
+cargo +nightly-2023-01-15 hacspec <crate-name>
 ```
 
 Note that the crate dependencies need to be compiled before it can be typechecked.
 
 ```bash
-cargo +nightly-2021-11-14 build
+cargo +nightly-2023-01-15 build
 ```
 
 If typechecking succeeds, it should show
@@ -91,7 +91,11 @@ cargo +nightly-2021-11-14 hacspec -o <coq-name>.v <crate-name>
 ## Publications & Other material
 
 * [📕 Tech report](https://hal.inria.fr/hal-03176482)
+* [📕 HACSpec: A gateway to high-assurance cryptography](https://github.com/hacspec/hacspec/blob/master/rwc2023-abstract.pdf)
 * [📕 Original hacspec paper](https://www.franziskuskiefer.de/publications/hacspec-ssr18-paper.pdf)
+
+### Secondary literature, using hacspec:
+* [📕 Last yard](https://eprint.iacr.org/2023/185)
 
 # Repository Structure
 
