@@ -4,7 +4,7 @@
 
 _This is the successor of https://github.com/HACS-workshop/hacspec._
 
-For a quick intro, you can look at the [presentation slides](./presentation_slides.pdf). 
+For a quick intro, you can look at the [presentation slides](https://github.com/hacspec/hacspec/blob/master/presentation_slides.pdf). 
 More information is available in the [book](https://hacspec.github.io/book/index.html).
 Also, see the Publications below.
 
