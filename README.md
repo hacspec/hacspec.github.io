@@ -28,22 +28,17 @@ Note:
  * The subcommand `cargo hax into` takes also options, list them with `cargo hax into --help`.
 
 ## Installation
-<details>
-  <summary><b>Nix</b></summary>
+### Nix
 
  This should work on [Linux](https://nixos.org/download.html#nix-install-linux), [MacOS](https://nixos.org/download.html#nix-install-macos) and [Windows](https://nixos.org/download.html#nix-install-windows).
 
-<details>
-  <summary><b>Prerequisites:</b> <a href="https://nixos.org/">Nix package
-manager</a> <i>(with <a href="https://nixos.wiki/wiki/Flakes">flakes</a> enabled)</i></summary>
+**Prerequisites:** [Nix package manager](https://nixos.org) _(with [flakes](https://nixos.wiki/wiki/Flakes) enabled)_
 
   - Either using the [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer), with the following bash one-liner:
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
     ```
   - or following [those steps](https://github.com/mschwaig/howto-install-nix-with-flake-support).
-
-</details>
 
 + Run hax on a crate to get F\*/Coq/...:
    - `cd path/to/your/crate`
@@ -54,20 +49,14 @@ manager</a> <i>(with <a href="https://nixos.wiki/wiki/Flakes">flakes</a> enabled
 + Install the tool:  `nix profile install github:hacspec/hacspec-v2`
    - then run `cargo hax --help` anywhere
 
-</details>
-
-<details>
-  <summary><b>Using Docker</b></summary>
+### Using Docker
 
 1. Clone this repo: `git clone git@github.com:hacspec/hacspec-v2.git && cd hacspec-v2`
 3. Build the docker image: `docker build -f .docker/Dockerfile . -t hacspec-v2`
 4. Get a shell: `docker run -it --rm -v /some/dir/with/a/crate:/work hacspec-v2 bash`
 5. You can now run `cargo-hax --help` (notice here we use `cargo-hax` instead of `cargo hax`)
 
-</details>
-
-<details>
-  <summary><b>Manual installation</b></summary>
+### Manual installation
 
 1. Make sure to have the following installed on your system:
 
@@ -79,8 +68,6 @@ manager</a> <i>(with <a href="https://nixos.wiki/wiki/Flakes">flakes</a> enabled
 2. Clone this repo: `git clone git@github.com:hacspec/hacspec-v2.git && cd hacspec-v2`
 3. Run the [setup.sh](./setup.sh) script: `./setup.sh`.
 4. Run `cargo-hax --help`
-
-</details>
 
 ## Examples
 
