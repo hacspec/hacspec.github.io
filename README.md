@@ -98,7 +98,7 @@ You can use the [`.utils/rebuild.sh`](https://github.com/hacspec/hax/tree/main/.
 
 * [📕 Tech report](https://hal.inria.fr/hal-03176482)
 * [📕 HACSpec: A gateway to high-assurance cryptography](https://github.com/hacspec/hacspec/blob/master/rwc2023-abstract.pdf)
-* [📕 Hax - Enabling High Assurance Cryptographic Software](https://github.com/hacspec/hacspec/blob/master/RustVerify24.pdf) at [RustVerify'24](https://sites.google.com/view/rustverify2024)
+* [📕 Hax - Enabling High Assurance Cryptographic Software](https://github.com/hacspec/hacspec.github.io/blob/master/RustVerify24.pdf) at [RustVerify'24](https://sites.google.com/view/rustverify2024)
 * [📕 Original hacspec paper](https://www.franziskuskiefer.de/publications/hacspec-ssr18-paper.pdf)  
 
 ### Secondary literature, using hacspec:
