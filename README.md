@@ -102,7 +102,10 @@ You can use the [`.utils/rebuild.sh`](https://github.com/hacspec/hax/tree/main/.
 * [📕 Original hacspec paper](https://www.franziskuskiefer.de/publications/hacspec-ssr18-paper.pdf)  
 
 ### Secondary literature, using hacspec:
+* [📕 A Verified Pipeline from a Specification Language to Optimized, Safe Rust](https://popl22.sigplan.org/details/CoqPL-2022-papers/5/A-Verified-Pipeline-from-a-Specification-Language-to-Optimized-Safe-Rust)
 * [📕 Last yard](https://eprint.iacr.org/2023/185)
+* [📕 A formal security analysis of Blockchain voting](https://popl24.sigplan.org/details/CoqPL-2024-papers/8/A-formal-security-analysis-of-Blockchain-voting)
+* [📕 Specifying Smart Contract with Hax and ConCert](https://popl24.sigplan.org/details/CoqPL-2024-papers/9/Specifying-Smart-Contract-with-Hax-and-ConCert)
 
 ## Contributing
 
