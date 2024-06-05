@@ -28,7 +28,7 @@ Here are some resources for learning more about hax:
  - [Book](https://hacspec.org/book) (work in progress)
     + [Quick start](https://hacspec.org/book/quick_start/intro.html)
     + [Tutorial](https://hacspec.org/book/tutorial/index.html)
- - [Examples](examples/): the [examples directory](examples/) contains
+ - [Examples](https://github.com/hacspec/hax/examples/): the [examples directory](./examples/) contains
    a set of examples that show what hax can do for you.
 
 ## Usage
@@ -57,7 +57,7 @@ Note:
 - [`jq`](https://jqlang.github.io/jq/)
 
 2. Clone this repo: `git clone git@github.com:hacspec/hax.git && cd hax`
-3. Run the [setup.sh](./setup.sh) script: `./setup.sh`.
+3. Run the [setup.sh](https://github.com/hacspec/hax/setup.sh) script: `./setup.sh`.
 4. Run `cargo-hax --help`
 
 </details>
@@ -129,7 +129,7 @@ You can also just use [direnv](https://github.com/nix-community/nix-direnv), wit
 - `cli/`: the `hax` subcommand for Cargo.
 
 ### Recompiling
-You can use the [`.utils/rebuild.sh`](./.utils/rebuild.sh) script (which is available automatically as the command `rebuild` when using the Nix devshell):
+You can use the [`.utils/rebuild.sh`](https://github.com/hacspec/hax/.utils/rebuild.sh) script (which is available automatically as the command `rebuild` when using the Nix devshell):
  - `rebuild`: rebuild the Rust then the OCaml part;
  - `rebuild TARGET`: rebuild the `TARGET` part (`TARGET` is either `rust` or `ocaml`).
 
