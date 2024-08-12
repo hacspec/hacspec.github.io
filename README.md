@@ -1,6 +1,10 @@
 <!-- WARNING: a GitHub action periodically replaces this file with https://github.com/hacspec/hax/blob/main/README.md. Do not make any modification to this file, instead make a PR to https://github.com/hacspec/hax/blob/main/README.md -->
 
 <p align="center">
+  <img src="logo.svg"/>
+</p>
+
+<p align="center">
   <a href="https://github.com/hacspec/hax">🔗 GitHub</a> |
   <a href="https://hacspec.org/book">📖 Book</a> |
   <a href="https://hacspec.org/blog">📝 Blog</a> |
