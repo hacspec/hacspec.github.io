@@ -41,6 +41,7 @@ Here are some resources for learning more about hax:
     + [Tutorial](https://hacspec.org/book/tutorial/index.html)
  - [Examples](https://github.com/hacspec/hax/tree/main/examples/): the [examples directory](https://github.com/hacspec/hax/tree/main/examples/) contains
    a set of examples that show what hax can do for you.
+ - Other [specifications](https://github.com/hacspec/specs) of cryptographic protocols.
 
 ## Usage
 Hax is a cargo subcommand. 
