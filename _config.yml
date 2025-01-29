@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
 markdown: GFM
-title: hax & hacspec
-description: A Rust verification tool.
+title: hacspec
+description: A specificaiton language.
